@@ -1,4 +1,4 @@
-package com.example.panday;
+package com.example.panda;
 
 import org.junit.Test;
 
