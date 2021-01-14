@@ -16,12 +16,14 @@
     <Button
         android:id="@+id/button"
         android:layout_width="110dp"
-        android:layout_height="100dp"
+        android:layout_height="97dp"
         android:background="#000000"
         android:text="+"
         android:textColor="@color/black"
         android:textSize="50dp"
         android:textStyle="bold" />
+
+
 
 
 </LinearLayout>

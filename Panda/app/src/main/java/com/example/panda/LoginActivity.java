@@ -115,6 +115,7 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
     private void updateUI(FirebaseUser user) { //update ui code here
         if (user != null) {
             Intent intent = new Intent(this, MemoActivity.class);
+            intent.putExtra("Id", user.getUid());
             startActivity(intent);
             finish();
         }
