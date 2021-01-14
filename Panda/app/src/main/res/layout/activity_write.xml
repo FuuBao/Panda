@@ -5,65 +5,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WriteActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <EditText
         android:id="@+id/title_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
         android:hint="제목"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:fontFamily="@font/lottebold" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
         <EditText
             android:id="@+id/contents_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
             android:background="@android:color/transparent"
             android:hint="내용"
+            android:fontFamily="@font/lottelight"
             android:maxLines="1" />
     </ScrollView>
-
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <TableRow
-        android:layout_width="363dp"
-        android:layout_height="64dp"
-        android:layout_gravity="center">
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center">
 
-        <Button
+        <ImageButton
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="알람"
-            tools:layout_editor_absoluteX="168dp"
-            tools:layout_editor_absoluteY="629dp" />
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/calander"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="centerInside"
+            android:background="@color/white"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="음성인식"
-            tools:layout_editor_absoluteX="284dp"
-            tools:layout_editor_absoluteY="629dp" />
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/voice"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="centerInside"
+            android:background="@color/white"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="수정"
-            tools:layout_editor_absoluteX="284dp"
-            tools:layout_editor_absoluteY="629dp" />
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/pencil"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="centerInside"
+            android:background="@color/white"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="삭제"
-            tools:layout_editor_absoluteX="284dp"
-            tools:layout_editor_absoluteY="629dp" />
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/trash"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="centerInside"
+            android:background="@color/white"/>
 
     </TableRow>
 </LinearLayout>

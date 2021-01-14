@@ -14,7 +14,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -28,6 +30,7 @@ import java.util.GregorianCalendar;
 public class DateActivity extends AppCompatActivity {
     private DatePicker dp;
     private TimePicker tp;
+    private CheckBox alarmYN;
 
     private String hour;
     private String minute;
@@ -39,6 +42,7 @@ public class DateActivity extends AppCompatActivity {
     private String d; //날짜
 
     private String dt;
+    private String titletext;
 
     private AlarmManager alarmManager;
     private GregorianCalendar mCalender;
@@ -51,6 +55,10 @@ public class DateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date);
 
+        Intent dateIntent=getIntent();
+        titletext=dateIntent.getExtras().getString("titletext"); //입력한 제목 받아오기
+
+        alarmYN=findViewById(R.id.alarmYN);
         TextView tv = findViewById(R.id.today_date);
         Calendar cal = Calendar.getInstance();
         tv.setText(cal.get(Calendar.YEAR) +"-"+ (cal.get(Calendar.MONTH)+1) +"-"+ cal.get(Calendar.DATE));
@@ -89,7 +97,16 @@ public class DateActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setAlarm();
+                if(alarmYN.isChecked()==true) {
+                    if(titletext.length()==0) Toast.makeText(getApplicationContext(), "제목을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    else {
+                        Toast.makeText(getApplicationContext(), "알람이 설정되었습니다.", Toast.LENGTH_SHORT).show();
+                        setAlarm(titletext);
+                    }
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "달력에 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -101,10 +118,12 @@ public class DateActivity extends AppCompatActivity {
         return minute;
     }
 
-    private void setAlarm() {
+    private void setAlarm(String title) {
         //AlarmReceiver에 값 전달
         Intent receiverIntent = new Intent(DateActivity.this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(DateActivity.this, 0, receiverIntent, 0);
+        receiverIntent.putExtra("titletext", titletext); //title 전달
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(DateActivity.this, 0, receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
 
         //날짜 포맷을 바꿔주는 소스코드
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

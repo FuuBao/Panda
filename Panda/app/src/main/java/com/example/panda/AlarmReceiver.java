@@ -36,7 +36,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-
+        String titletext = intent.getExtras().getString("titletext");
         builder = null;
         manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -49,13 +49,13 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
 
         //알림창 클릭 시 activity 화면 부름
-        Intent intent2 = new Intent(context, DateActivity.class);
+        Intent intent2 = new Intent(context, LoadingActivity.class); //수정 -> 메모로 이동하게
         PendingIntent pendingIntent = PendingIntent.getActivity(context,101,intent2, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //알림창 제목
-        builder.setContentTitle("알람");
+        builder.setContentTitle(titletext);
         //알림창 아이콘
-        builder.setSmallIcon(R.drawable.ic_launcher_background);
+        builder.setSmallIcon(R.drawable.pubao);
         //알림창 터치시 자동 삭제
         builder.setAutoCancel(true);
         builder.setPriority(NotificationCompat.PRIORITY_MAX);
