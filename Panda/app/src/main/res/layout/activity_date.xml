@@ -13,7 +13,7 @@
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="날짜설정"
+        android:text="알림설정"
         android:textSize="40dp"
         android:textColor="@color/green"
         android:fontFamily="@font/lottebold"
@@ -83,33 +83,16 @@
             android:timePickerMode="spinner" />
     </TableRow>
 
-    <TableRow
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="horizontal">
-    <CheckBox
-        android:id="@+id/alarmYN"
-        android:layout_gravity="left"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="정해진 시간에 알림 설정"
-        android:fontFamily="@font/lottelight"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
     <Button
         android:id="@+id/dateSetting"
+        android:layout_gravity="right"
         android:gravity="center"
         android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="날짜 설정"
+        android:text="알림 설정"
         android:background="@drawable/greenbold"
         android:textColor="@color/white"
         android:fontFamily="@font/lottelight"/>
-    </TableRow>
 
 </LinearLayout>

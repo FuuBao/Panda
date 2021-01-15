@@ -30,7 +30,6 @@ import java.util.GregorianCalendar;
 public class DateActivity extends AppCompatActivity {
     private DatePicker dp;
     private TimePicker tp;
-    private CheckBox alarmYN;
 
     private String hour;
     private String minute;
@@ -58,7 +57,6 @@ public class DateActivity extends AppCompatActivity {
         Intent dateIntent=getIntent();
         titletext=dateIntent.getExtras().getString("titletext"); //입력한 제목 받아오기
 
-        alarmYN=findViewById(R.id.alarmYN);
         TextView tv = findViewById(R.id.today_date);
         Calendar cal = Calendar.getInstance();
         tv.setText(cal.get(Calendar.YEAR) +"-"+ (cal.get(Calendar.MONTH)+1) +"-"+ cal.get(Calendar.DATE));
@@ -97,16 +95,11 @@ public class DateActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(alarmYN.isChecked()==true) {
                     if(titletext.length()==0) Toast.makeText(getApplicationContext(), "제목을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     else {
                         Toast.makeText(getApplicationContext(), "알람이 설정되었습니다.", Toast.LENGTH_SHORT).show();
                         setAlarm(titletext);
                     }
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "달력에 등록되었습니다.", Toast.LENGTH_SHORT).show();
-                }
             }
         });
     }
