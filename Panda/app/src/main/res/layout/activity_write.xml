@@ -5,65 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WriteActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <EditText
-        android:id="@+id/title_edit"
+        android:id="@+id/edtMemo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
         android:hint="제목"
-        android:maxLines="1"/>
+        android:maxLines="1" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="622dp">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
         <EditText
-            android:id="@+id/contents_edit"
+            android:id="@+id/edtContent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
             android:background="@android:color/transparent"
             android:hint="내용"
             android:maxLines="1" />
     </ScrollView>
 
 
-    <TableRow
-        android:layout_width="363dp"
-        android:layout_height="64dp"
-        android:layout_gravity="center">
+
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="알람"
-            tools:layout_editor_absoluteX="168dp"
-            tools:layout_editor_absoluteY="629dp" />
+            android:id="@+id/btnDone"
+            android:text="done"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="음성인식"
-            tools:layout_editor_absoluteX="284dp"
-            tools:layout_editor_absoluteY="629dp" />
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="수정"
-            tools:layout_editor_absoluteX="284dp"
-            tools:layout_editor_absoluteY="629dp" />
+    <Button
+        android:id="@+id/btnNo"
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:text="cancel" />
 
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="삭제"
-            tools:layout_editor_absoluteX="284dp"
-            tools:layout_editor_absoluteY="629dp" />
 
-    </TableRow>
 </LinearLayout>
