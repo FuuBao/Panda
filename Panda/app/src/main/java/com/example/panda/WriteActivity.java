@@ -1,5 +1,6 @@
 package com.example.panda;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -16,10 +17,17 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class WriteActivity extends AppCompatActivity {
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
     private EditText mTitleEditText;
     private EditText mContentsEditText;
     private ImageButton button2;
@@ -28,11 +36,20 @@ public class WriteActivity extends AppCompatActivity {
     private ImageButton button5;
     private final int REQ_CODE_SPEECH_INPUT = 100;
     private String titletext;
+    private String Id;
+    private String title;
+    private String contents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
+
+        Intent intent=getIntent();
+        Id=intent.getExtras().getString("Id");
+
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
 
         mTitleEditText = (EditText) findViewById(R.id.title_edit);
         mContentsEditText = (EditText) findViewById(R.id.contents_edit);
@@ -61,6 +78,27 @@ public class WriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 promptSpeechInput();
+            }
+        });
+
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                title=mTitleEditText.getText().toString();
+                contents=mContentsEditText.getText().toString();
+
+                Memo memo = new Memo(title, contents);
+                myRef.child(Id).push().setValue(memo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(WriteActivity.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(WriteActivity.this, "저장을 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }

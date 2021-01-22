@@ -16,6 +16,7 @@
         android:layout_marginLeft="10dp"
         android:hint="제목"
         android:maxLines="1"
+        android:backgroundTint="@color/green"
         android:fontFamily="@font/lottebold" />
 
     <ScrollView
@@ -71,7 +72,7 @@
             android:id="@+id/button4"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/pencil"
+            android:src="@drawable/save"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:scaleType="centerInside"

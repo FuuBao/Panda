@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "80168049610",
+    "firebase_url": "https://panda-5b4a8-default-rtdb.firebaseio.com",
     "project_id": "panda-5b4a8",
     "storage_bucket": "panda-5b4a8.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "80168049610-mm929epuhdja8b6l8ajgjabl9qngdnhi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.panda",
+            "certificate_hash": "4921be60251704c1e452d6188bd1833b941cd689"
+          }
+        },
         {
           "client_id": "80168049610-kbsmo2739ksr61a41jodonk2bb8mregi.apps.googleusercontent.com",
           "client_type": 3
@@ -27,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "80168049610-kbsmo2739ksr61a41jodonk2bb8mregi.apps.googleusercontent.com",
+              "client_id": "80168049610-ht7fji9dm9jfutjucv17ua4apd22l71h.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
