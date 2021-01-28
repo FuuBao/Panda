@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.panda">
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:largeHeap="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-        <activity android:name=".LoginActivity" android:theme="@style/Theme.Panda"></activity>
-        <activity android:name=".WriteActivity" android:theme="@style/Theme.Panda"></activity>
-        <activity android:name=".DateActivity" android:theme="@style/Theme.Panda"></activity>
-        <activity android:name=".LoadingActivity" android:theme="@style/Theme.Panda">
+        <activity
+            android:name=".ItemClickActivity"
+            android:theme="@style/Theme.Panda" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.Panda" />
+        <activity
+            android:name=".WriteActivity"
+            android:theme="@style/Theme.Panda" />
+        <activity
+            android:name=".DateActivity"
+            android:theme="@style/Theme.Panda" />
+        <activity
+            android:name=".MemoActivity"
+            android:theme="@style/Theme.Panda" />
+        <activity
+            android:name=".SettingActivity"
+            android:theme="@style/Theme.Panda"/>
+        <activity
+            android:name=".LoadingActivity"
+            android:theme="@style/Theme.Panda">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".AlarmReceiver"
+
+        <receiver
+            android:name=".AlarmReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
