@@ -104,6 +104,8 @@ public class WriteActivity extends AppCompatActivity {
         button5.setOnClickListener(new View.OnClickListener() { //삭제 버튼
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent();
+                setResult(RESULT_CANCELED, intent);
                 finish();
             }
         });

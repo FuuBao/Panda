@@ -1,6 +1,7 @@
 package com.example.panda;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -11,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,9 +22,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,6 +59,8 @@ public class ItemClickActivity extends AppCompatActivity {
     private Boolean ischecked;
     private String Id;
     private String position;
+    private int pos;
+    private int newPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +73,10 @@ public class ItemClickActivity extends AppCompatActivity {
         Intent intent=getIntent();
         Id=intent.getExtras().getString("Id"); //로그인한 id 받아오기
         position=intent.getExtras().getString("pos"); //선택한 위치 받아오기
+        pos=Integer.parseInt(position);
         oldTitle=intent.getExtras().getString("oldTitle"); //원래 제목
         oldContents=intent.getExtras().getString("oldContents"); //원래 내용
-        oldischecked=intent.getExtras().getBoolean("ischecked"); //원래 암호여부 체크
+        oldischecked=intent.getExtras().getBoolean("ischecked"); //원래 암호여부 체
 
         mTitleEditText = (EditText) findViewById(R.id.title_edit);
         mContentsEditText = (EditText) findViewById(R.id.contents_edit);
@@ -117,20 +126,42 @@ public class ItemClickActivity extends AppCompatActivity {
                     String substr = sdf.format(date);
 
                     Memo memo=new Memo(title, contents, ischecked, substr);
-                    myRef.child(Id).child(position).setValue(memo);
+                    myRef.child(Id).child("memo").child(position).setValue(memo);
                 }
             finish();
             }
         });
 
-        button5.setOnClickListener(new View.OnClickListener() { //삭제(db에서 지우기)
+        button5.setOnClickListener(new View.OnClickListener() {//삭제(db에서 지우기)
             @Override
             public void onClick(View v) {
-                myRef.child(Id).child(position).removeValue();
-                finish();
-                Toast.makeText(getParent(),
+                myRef.child(Id).child("memo").child(position).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        myRef.child(Id).child("memo").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot memoData : snapshot.getChildren()) {
+                                    newPos=Integer.parseInt(memoData.getKey());
+                                    Memo getMemo = memoData.getValue(Memo.class);
+                                    // child 내에 있는 데이터만큼 반복합니다.
+                                    if(newPos>pos) {
+                                        myRef.child(Id).child("memo").child(Integer.toString(newPos-1)).setValue(getMemo);
+                                    }
+                                    newPos=Integer.parseInt(memoData.getKey());
+                                }
+                                if(newPos!=(pos-1))
+                                    myRef.child(Id).child("memo").child(Integer.toString(newPos)).removeValue();
+                            } //0, 1, 2, 3에 저장됐을 때 3을 삭제. 그럼 pos=3이고 newPos는 2까지감
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) { }
+                        });
+                        }
+                });
+                Toast.makeText(getApplicationContext(),
                         "삭제되었습니다.",
                         Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
