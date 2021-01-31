@@ -1,41 +1,46 @@
 package com.example.panda;
 
 public class Memo {
-    int seq;
-    String maintext; //메모
-    String contenttext;//내용
+    private String title;
+    private String contents;
+    private boolean pw;
+    private String d;
 
-    public Memo(int seq, String maintext, String subtext, int isdone, String contenttext) {
-        this.seq = seq;
-        this.maintext = maintext;
-        this.contenttext = contenttext;
+    public Memo() {}
+
+    public Memo(String title, String d) { //리스트에 보여질 제목과 날짜만 저장
+        this.title=title;
+        this.d=d;
     }
 
-    public Memo(String maintext, String subtext, int isdone) {
-        this.maintext = maintext;
+    public Memo(String title, String contents, boolean pw, String d) { //db에 저장
+        this.title=title;
+        this.contents=contents;
+        this.pw=pw;
+        this.d=d;
     }
 
-    public int getSeq() {
-        return seq;
+    public void setTitle(String title) {
+        this.title=title;
     }
 
-    public void setSeq(int seq) {
-        this.seq = seq;
+    public void setContents(String contents) {
+        this.contents=contents;
     }
 
-    public String getMaintext() {
-        return maintext;
+    public void setD(String d) { this.d=d; }
+
+    public String getTitle() {
+        return this.title;
     }
 
-    public void setMaintext(String maintext) {
-        this.maintext = maintext;
+    public String getContents() {
+        return this.contents;
     }
 
-    public String getContenttext() {
-        return contenttext;
+    public boolean getPw() {
+        return this.pw;
     }
 
-    public void setContenttext(String contenttext) {
-        this.contenttext = contenttext;
-    }
+    public String getD() { return this.d; }
 }

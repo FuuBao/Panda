@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,24 +7,31 @@
     android:orientation="vertical"
     tools:context=".MemoActivity">
 
+<ImageButton
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_gravity="right"
+    android:layout_marginTop="10dp"
+    android:scaleType="centerInside"
+    android:src="@drawable/settings"
+    android:background="@color/white"
+    android:layout_marginRight="10dp"
+    android:id="@+id/setting"/>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:background="#ffffff"
         android:fillViewport="true">
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-
-
-
     </ScrollView>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -36,10 +43,6 @@
         app:fabSize="normal"
         android:clickable="true"
         app:srcCompat="@drawable/ic_add_black_24dp" />
+    </RelativeLayout>
 
-
-
-
-
-
-</RelativeLayout>
+</LinearLayout>
