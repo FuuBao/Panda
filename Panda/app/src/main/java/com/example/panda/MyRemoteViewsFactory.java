@@ -70,7 +70,6 @@ public class MyRemoteViewsFactory implements RemoteViewsService.RemoteViewsFacto
                     Memo memo = snapshot.getValue(Memo.class); //widgetite
                     WidgetItem widgetItem=new WidgetItem(memo.getTitle());
                     arrayList.add(widgetItem);
-                    //arrayList.add(new WidgetItem("memo.getTitle()"));
                 }
                 //recyclerAdapter.notifyDataSetChanged();
             }
