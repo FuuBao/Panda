@@ -14,6 +14,12 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
+        <activity android:name=".MakePwActivity"
+            android:theme="@style/Theme.Panda"></activity>
+        <activity android:name=".PwDeleteActivity"
+            android:theme="@style/Theme.Panda"/>
+        <activity android:name=".PwEditActivity"
+            android:theme="@style/Theme.Panda"/>
         <activity
             android:name=".ItemClickActivity"
             android:theme="@style/Theme.Panda" />
@@ -31,7 +37,7 @@
             android:theme="@style/Theme.Panda" />
         <activity
             android:name=".SettingActivity"
-            android:theme="@style/Theme.Panda"/>
+            android:theme="@style/Theme.Panda" />
         <activity
             android:name=".LoadingActivity"
             android:theme="@style/Theme.Panda">

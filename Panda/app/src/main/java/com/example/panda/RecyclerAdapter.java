@@ -39,8 +39,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         Memo memo = listdata.get(i);
 
         itemViewHolder.maintext.setText(memo.getTitle());
-        //itemViewHolder.subtext.setText(memo.getSubtext());
-
+        itemViewHolder.subtext.setText(memo.getD());
             /*if(memo.getIsdone()==0){
                 itemViewHolder.img.setBackgroundColor(Color.LTGRAY);
             }else{
@@ -70,14 +69,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
 
         private TextView maintext;
         private TextView subtext;
-        private ImageView img;
 
         public ItemViewHolder(@NonNull View itemView){
             super(itemView);
 
             maintext = itemView.findViewById(R.id.item_maintext);
             subtext = itemView.findViewById(R.id.item_subtext);
-            img = itemView.findViewById(R.id.item_image);
 
             //아이템 클릭 이벤트
             itemView.setOnClickListener(new View.OnClickListener() {
