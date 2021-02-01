@@ -41,7 +41,7 @@ public class MyRemoteViewsFactory implements RemoteViewsService.RemoteViewsFacto
     private ArrayAdapter<WidgetItem> adapter;
     public DataSnapshot snapshot;
 
-   // String Id = ((LoginActivity)LoginActivity.).Id;
+    String Id = ((LoginActivity)LoginActivity.context_main).Id;
 
 
     //DB를 대신하여 arrayList에 데이터를 추가하는 함수ㅋㅋ
@@ -61,7 +61,8 @@ public class MyRemoteViewsFactory implements RemoteViewsService.RemoteViewsFacto
         arrayList = new ArrayList<>();// widgetitem 객체를 담을 어레이 리스트(어댑터쪽으로)
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("WidgetItem");//db테이블 연결
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference = database.getReference();
+        databaseReference.child(Id).child("memo").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //파이어 베이스 데이터베이스의 데이터를 받아오는 곳

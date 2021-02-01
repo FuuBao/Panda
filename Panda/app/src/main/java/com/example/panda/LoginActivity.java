@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -35,14 +36,21 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth auth;
     private GoogleApiClient googleApiClient;
     private static final int REQ_SIGN_GOOGLE = 100; // 구글 로그인 결과 코드
-    private String Id;
+    public String Id;
     private int count;
+    public static Context context_main;
+
+    public int var;
+
 
     // main(Strings[] args)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        setContentView(R.layout.activity_login);
+        context_main=this;
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
