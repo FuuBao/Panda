@@ -36,12 +36,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth auth;
     private GoogleApiClient googleApiClient;
     private static final int REQ_SIGN_GOOGLE = 100; // 구글 로그인 결과 코드
-    public String Id;
-    private int count;
+    private String Id;
     public static Context context_main;
-
-    public int var;
-
 
     // main(Strings[] args)
     @Override
@@ -49,7 +45,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        setContentView(R.layout.activity_login);
         context_main=this;
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -103,6 +98,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         if(task.isSuccessful()) {
                             Intent intent1 = new Intent(getApplicationContext(), MemoActivity.class);
                             Id=account.getId();
+                            setId(Id);
                             intent1.putExtra("Id", Id);
                             startActivity(intent1);
                         } else {
@@ -115,5 +111,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    public String getId() {
+        return this.Id;
+    }
+
+    public void setId(String Id) {
+        this.Id=Id;
     }
 }

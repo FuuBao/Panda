@@ -26,26 +26,24 @@ package com.example.panda;
  */
 public class MyRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
-    private int count;
 
     //context 설정하기
     public Context context;
+    private String Id;
     public ArrayList<WidgetItem> arrayList;
     public FirebaseDatabase database;
     public DatabaseReference myRef;
     private RecyclerAdapter recyclerAdapter;
+    private int pos;
+
     public MyRemoteViewsFactory(Context context) {
         this.context = context;
     }
-    private RecyclerView recyclerView;
-    private ArrayAdapter<WidgetItem> adapter;
-    public DataSnapshot snapshot;
-
-    String Id = ((LoginActivity)LoginActivity.context_main).Id;
-
 
     //DB를 대신하여 arrayList에 데이터를 추가하는 함수ㅋㅋ
     public void setData() {
+
+        Id = ((LoginActivity)LoginActivity.context_main).getId();
 
 
         /*arrayList = new ArrayList<>();
@@ -56,20 +54,19 @@ public class MyRemoteViewsFactory implements RemoteViewsService.RemoteViewsFacto
         WidgetItem widgetItem=new WidgetItem(memo.getTitle());
         arrayList.add(widgetItem);*/
 
-
-
         arrayList = new ArrayList<>();// widgetitem 객체를 담을 어레이 리스트(어댑터쪽으로)
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("WidgetItem");//db테이블 연결
         databaseReference = database.getReference();
-        databaseReference.child(Id).child("memo").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(Id).child("memo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //파이어 베이스 데이터베이스의 데이터를 받아오는 곳
                 arrayList.clear();//기존 배열리스트가 존재하지 않게 초기화
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { //반복문으로 데이터 List를 추출
+                    pos=Integer.parseInt(snapshot.getKey());
                     Memo memo = snapshot.getValue(Memo.class); //widgetite
-                    WidgetItem widgetItem=new WidgetItem(memo.getTitle());
+                    WidgetItem widgetItem=new WidgetItem(pos+1, memo.getTitle());
                     arrayList.add(widgetItem);
                     //arrayList.add(new WidgetItem("memo.getTitle()"));
                 }
@@ -159,6 +156,7 @@ public class MyRemoteViewsFactory implements RemoteViewsService.RemoteViewsFacto
 
         // 항목 선택 이벤트 발생 시 인텐트에 담겨야 할 항목 데이터를 추가해주는 코드
         Intent dataIntent = new Intent();
+        dataIntent.putExtra("id", arrayList.get(position).getId());
         dataIntent.putExtra("content", arrayList.get(position).getContent());
         listviewWidget.setOnClickFillInIntent(R.id.text1, dataIntent);
 

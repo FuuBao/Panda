@@ -1,5 +1,6 @@
 package com.example.panda;
 
+        import android.app.Activity;
         import android.app.PendingIntent;
         import android.appwidget.AppWidgetManager;
         import android.appwidget.AppWidgetProvider;
@@ -83,7 +84,7 @@ public class ListViewWidget extends AppWidgetProvider {
         AppWidgetManager mgr = AppWidgetManager.getInstance(context);
         if (intent.getAction().equals(ACTION_TOAST)) {
 
-            Intent i = new Intent(context, MemoActivity.class);
+            Intent i = new Intent(context, LoadingActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
         }

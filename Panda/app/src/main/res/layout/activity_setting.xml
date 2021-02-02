@@ -9,21 +9,36 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/pwset"
         android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:text="암호 설정"
+        android:text="암호 생성"
         android:gravity="left|center"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:fontFamily="@font/lottelight"/>
     <Button
-        android:layout_marginTop="30dp"
+        android:id="@+id/pwchange"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:text="로그아웃"
-        android:gravity="center"
+        android:text="암호 변경"
+        android:gravity="left|center"
+        android:textSize="20dp"
+        android:fontFamily="@font/lottelight"/>
+    <Button
+        android:id="@+id/pwdelete"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:text="암호 삭제"
+        android:gravity="left|center"
         android:textSize="20dp"
         android:fontFamily="@font/lottelight"/>
 

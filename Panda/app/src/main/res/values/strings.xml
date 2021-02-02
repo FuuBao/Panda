@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Panda</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">Panda</string>
     <string name="add_widget">Add widget</string>
 </resources>

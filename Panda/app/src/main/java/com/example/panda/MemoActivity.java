@@ -63,6 +63,7 @@ public class MemoActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
     private String Id;
+    private String pw;
 
     private ImageButton setting;
 
@@ -85,6 +86,18 @@ public class MemoActivity extends AppCompatActivity {
         Intent intent=getIntent();
         Id=intent.getExtras().getString("Id"); //로그인한 id 받아오기
 
+        pw=null;
+        myRef.child(Id).child("pw").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds:snapshot.getChildren()) {
+                    pw=ds.getValue(String.class); //저장해놓은 암호 불러오기
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {  }
+        });
+
         recyclerView = findViewById(R.id.recyclerview);
 
         memoList = new ArrayList<>();
@@ -105,8 +118,8 @@ public class MemoActivity extends AppCompatActivity {
                 for (DataSnapshot memoData : dataSnapshot.getChildren()) {
                     //String t=memoData.
                     Memo getMemo = memoData.getValue(Memo.class);
-                    Memo pushMemo = new Memo(getMemo.getTitle(), getMemo.getD());
-                    recyclerAdapter.addItem(pushMemo);
+                    //Memo pushMemo = new Memo(getMemo.getTitle(), getMemo.getD());
+                    recyclerAdapter.addItem(getMemo);
                     // child 내에 있는 데이터만큼 반복합니다.
                 }
                 recyclerAdapter.notifyDataSetChanged();
@@ -126,8 +139,6 @@ public class MemoActivity extends AppCompatActivity {
             @Override
             public void onItemClick(RecyclerAdapter.ItemViewHolder holder, View view, int position) {
                 //암호설정여부확인
-                //kjkjkjk
-
                 Memo memo=recyclerAdapter.getItem(position);
                 Intent intent=new Intent(getApplicationContext(), ItemClickActivity.class);
                 intent.putExtra("Id", Id);
@@ -136,39 +147,16 @@ public class MemoActivity extends AppCompatActivity {
                 intent.putExtra("oldContents", memo.getContents());
                 intent.putExtra("ischecked", memo.getPw());
 
-                startActivity(intent);
+                if(memo.getPw()==true) {
+                    // 커스텀 다이얼로그를 생성한다. 사용자가 만든 클래스이다.
+                    CustomDialog customDialog = new CustomDialog(MemoActivity.this);
+                    customDialog.callFunction(pw, intent);
+                }
+                else {
+                    startActivity(intent);
+                }
             }
         });
-
-        /*
-        recyclerAdapter.setOnItemLongClicklistener(new OnMemoItemLongClickListener() {
-            @Override
-            public void onItemLongClick(RecyclerAdapter.ItemViewHolder holder, View view, int position) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MemoActivity.this);
-
-                builder.setTitle("비밀번호를 입력하세요.");
-                builder.setView(R.layout.pwdialog);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        Dialog f = (Dialog) dialog;
-                        EditText input = (EditText) f.findViewById(R.id.pwdialog);
-                        String value = input.getText().toString(); //value.toString(); helper_category.insert(value);
-                        // Do something with value!
-
-
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        // Canceled.
-                        }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-                builder.show();
-            }
-        });
-        */
 
         setting.setOnClickListener(new View.OnClickListener() { //설정화면
             @Override
