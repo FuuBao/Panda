@@ -1,21 +1,18 @@
 package com.example.panda;
 
 public class WidgetItem {
-    int title;
-    String content;
 
-    public WidgetItem(int title, String content) {
-        this.title = title;
+    String content;
+    int id;
+
+    public WidgetItem(int id, String content) {
+        this.id=id;
         this.content = content;
     }
 
-    public int getTitle() {
-        return title;
-    }
+    public int getId() { return id; }
 
-    public void setTitle(int title) {
-        this.title = title;
-    }
+    public void setId(int id) { this.id=id; }
 
     public String getContent() {
         return content;

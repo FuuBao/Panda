@@ -8,39 +8,38 @@
 
     <application
         android:allowBackup="true"
-        android:hardwareAccelerated="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/pubao"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true">
-        <activity android:name=".MakePwActivity"
-            android:theme="@style/Theme.Panda"></activity>
-        <activity android:name=".PwDeleteActivity"
-            android:theme="@style/Theme.Panda"/>
-        <activity android:name=".PwEditActivity"
-            android:theme="@style/Theme.Panda"/>
-        <activity
-            android:name=".ItemClickActivity"
-            android:theme="@style/Theme.Panda" />
-        <activity
-            android:name=".LoginActivity"
-            android:theme="@style/Theme.Panda" />
-        <activity
-            android:name=".WriteActivity"
-            android:theme="@style/Theme.Panda" />
-        <activity
-            android:name=".DateActivity"
-            android:theme="@style/Theme.Panda" />
-        <activity
-            android:name=".MemoActivity"
-            android:theme="@style/Theme.Panda" />
-        <activity
-            android:name=".SettingActivity"
-            android:theme="@style/Theme.Panda" />
-        <activity
-            android:name=".LoadingActivity"
-            android:theme="@style/Theme.Panda">
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Panda">
+
+        <service android:name=".MyRemoteViewsService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
+        <receiver android:name=".ListViewWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/new_app_widget2_info" />
+        </receiver>
+        
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".WriteActivity" />
+        <activity android:name=".MemoActivity" />
+        <activity android:name=".DateActivity"/>
+        <activity android:name=".MakePwActivity"/>
+        <activity android:name=".PwDeleteActivity"/>
+        <activity android:name=".PwEditActivity"/>
+        <activity android:name=".ItemClickActivity" />
+        <activity android:name=".SettingActivity"/>
+        <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,5 +56,4 @@
             </intent-filter>
         </receiver>
     </application>
-
 </manifest>

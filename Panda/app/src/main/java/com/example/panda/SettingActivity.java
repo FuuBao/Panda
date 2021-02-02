@@ -25,7 +25,6 @@ public class SettingActivity extends AppCompatActivity {
     private Button pwset;
     private Button pwchange;
     private Button pwdelete;
-    private Button logout;
     private String Id;
     private String pw;
 
@@ -55,7 +54,6 @@ public class SettingActivity extends AppCompatActivity {
         pwset=findViewById(R.id.pwset);
         pwchange=findViewById(R.id.pwchange);
         pwdelete=findViewById(R.id.pwdelete); //암호 설정, 변경, 삭제 버튼
-        logout=findViewById(R.id.logout);
 
         pwset.setOnClickListener(new View.OnClickListener() { //암호 없을 때, 암호 설정
             @Override

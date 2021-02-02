@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -36,12 +37,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private GoogleApiClient googleApiClient;
     private static final int REQ_SIGN_GOOGLE = 100; // 구글 로그인 결과 코드
     private String Id;
+    public static Context context_main;
 
     // main(Strings[] args)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        context_main=this;
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -94,6 +98,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         if(task.isSuccessful()) {
                             Intent intent1 = new Intent(getApplicationContext(), MemoActivity.class);
                             Id=account.getId();
+                            setId(Id);
                             intent1.putExtra("Id", Id);
                             startActivity(intent1);
                         } else {
@@ -106,5 +111,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    public String getId() {
+        return this.Id;
+    }
+
+    public void setId(String Id) {
+        this.Id=Id;
     }
 }
