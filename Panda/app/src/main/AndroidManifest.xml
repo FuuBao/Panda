@@ -24,7 +24,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/new_app_widget2_info" />
         </receiver>
-        
+
 
         <activity android:name=".WriteActivity" />
         <activity android:name=".MemoActivity" />
